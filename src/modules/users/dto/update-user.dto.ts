@@ -43,7 +43,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
    * - Admin unbans user: { "isActive": true }
    * - User verfication: { "isActive": true } after email confirmation
    */
-  @IsOptional()
+  @IsOptional() 
   @IsBoolean()
   isActive?: boolean;
 }
