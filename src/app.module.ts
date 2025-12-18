@@ -37,7 +37,9 @@ import { UsersModule } from './modules/users/users.module';
       inject: [ConfigService],
     }),
 
+    // Feature modules
     UsersModule,
+    // AuthModule, (Phase C)
   ],
   controllers: [],
   providers: [],
