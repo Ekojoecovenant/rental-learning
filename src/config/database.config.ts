@@ -1,5 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { User } from '../modules/users/entities/user.entity';
 
 /**
  * Database Configuration Factory
@@ -24,10 +25,17 @@ export const getDatabaseConfig = (
   database: configService.get<string>('DB_NAME'),
 
   /**
-   * entities: Where are your database modules?
-   * This pattern finds all *.entity.ts files in your project
+   * entities: Explicitly list all entities
+   *
+   * Why explicit instead of glob pattern?
+   * - More reliable (no path resolution issues)
+   * - Clear what entities exist
+   * - Better for TypeScript type checking
+   *
+   * As you add more entities, import and add them here:
+   * entities: [User, Vehicle, Rental, etc.]
    */
-  entities: [__dirname + '/../**/*.entity{.ts, .js}'],
+  entities: [User],
 
   /**
    * synchronize: Auto-create tables from entities
@@ -44,7 +52,7 @@ export const getDatabaseConfig = (
   synchronize: configService.get<string>('NODE_ENV') !== 'production',
 
   /**
-   * loggin: See SQL queries in console
+   * logging: See SQL queries in console
    * Helpful for learning and debugging
    */
   logging: configService.get<string>('NODE_ENV') === 'development',
